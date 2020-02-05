@@ -1,9 +1,13 @@
 Character player;
+PImage ghostSprite;
 Boolean moveUP = false,moveDOWN = false,moveRIGHT = false,moveLEFT = false;
 
 void setup(){
   size(800,800);
-  player = new Character(width/2,height/2);
+  imageMode(CENTER);
+  
+  ghostSprite = loadImage("/sprites/Ghost.png");
+  player = new Character(width/2,height/2,ghostSprite);
 }
 
 void draw(){

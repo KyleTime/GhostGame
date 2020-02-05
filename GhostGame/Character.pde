@@ -1,6 +1,5 @@
 class Character{
   float x, y, xv, yv, moveSpeed;
-  Boolean faceRight;
   PImage sprite;
   
   //Kyle Animation Code
@@ -9,7 +8,7 @@ class Character{
   Animator anim;
   //End of Kyle Animation Code
   
-  public Character(float x, float y, PImage sprite){
+  public Character(float x, float y){
     this.x = x;
     this.y = y;
     
@@ -50,16 +49,16 @@ class Character{
     //--------------- movement update
     if(moveUP&&yv<5)yv-=moveSpeed;
     if(moveDOWN&&yv>-5)yv+=moveSpeed;
-    if(moveLEFT){xv-=moveSpeed;faceRight=false;}
-    if(moveRIGHT){xv+=moveSpeed;faceRight=true;}
+    if(moveLEFT)xv-=moveSpeed;
+    if(moveRIGHT)xv+=moveSpeed;
     //--------------- wall bounds
     if(x+xv>width){
-      xv=x-width;
+      xv=width-x;
     }else if(x+xv<0){
       xv=x;
     }
     if(y+yv>height){
-      yv=y-height;
+      yv=height-y;
     }else if(y+yv<0){
       yv=y;
     }
@@ -95,12 +94,8 @@ class Character{
   
   void show(){
     pushMatrix();
-    translate(x,y);
-    if(!faceRight){
-      scale(-1,1);
-    }
     fill(255);
-    image(sprite,0,0);
+    square(x,y,10);
     popMatrix();
   }
 }

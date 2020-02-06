@@ -24,7 +24,7 @@ class Character{
     if(moveDOWN&&yv>-5)yv+=moveSpeed;
     if(moveLEFT){xv-=moveSpeed;faceRight=false;}
     if(moveRIGHT){xv+=moveSpeed;faceRight=true;}
-    //--------------- wall bounds
+    //--------------- room bounds
     if(x+xv>width){
       if(roomIndex%mapSize<mapSize-1&&roomIndex%mapSize>=0){
         roomIndex+=1;
@@ -41,8 +41,8 @@ class Character{
         xv=x;
       }
     }
-    else if(y+yv>height){
-      if(roomIndex<pow(mapSize,2)-1&&roomIndex%mapSize>=0){
+    if(y+yv>height){
+      if(roomIndex<mapSize*mapSize-mapSize&&roomIndex%mapSize>=0){
         roomIndex+=mapSize;
         y=0-yv;
       }
@@ -50,7 +50,7 @@ class Character{
         yv=y-height;
       }
     }else if(y+yv<0){
-      if(roomIndex%mapSize>0){
+      if(roomIndex>=mapSize){
         roomIndex-=mapSize;
         y=height-yv;
       }

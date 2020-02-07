@@ -1,9 +1,13 @@
 Character player;
 Boolean moveUP = false,moveDOWN = false,moveRIGHT = false,moveLEFT = false;
 
+public ArrayList<Animation> BoxAnim;
+
 void setup(){
   size(800,800);
   player = new Character(width/2,height/2);
+  
+  SetBoxAnim();
 }
 
 void draw(){
@@ -12,6 +16,11 @@ void draw(){
   //--------- player update
   player.update();
   player.show();
+}
+
+void SetBoxAnim()
+{
+  
 }
 
 

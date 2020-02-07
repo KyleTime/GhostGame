@@ -1,17 +1,41 @@
 class Character{
   float x, y, xv, yv, moveSpeed;
-  Boolean faceRight;
   PImage sprite;
   int roomIndex;
+  Boolean faceRight;
+  Animation idle;
+  Animation walk;
+  Animator anim;
   
-  public Character(float x, float y, PImage sprite, int i){
+  public Character(float x, float y){
     this.x = x;
     this.y = y;
-    this.sprite = sprite;
-    faceRight=true;
     
+    faceRight=true;
     moveSpeed = 0.3;
-    roomIndex = i;
+    roomIndex = 0;
+    
+    PImage g1 = loadImage("/sprites/Ghost/ghost_0.png");
+    PImage g2 = loadImage("/sprites/Ghost/ghost_1.png");
+    PImage g3 = loadImage("/sprites/Ghost/ghost_2.png");
+    PImage g4 = loadImage("/sprites/Ghost/ghost_3.png");
+    
+    ArrayList<PImage> idleFrames = new ArrayList<PImage>();
+    idleFrames.add(g1);
+    idleFrames.add(g2);
+    
+    idle = new Animation(idleFrames, "idle", 1000, true);
+    
+    ArrayList<PImage> moveFrames = new ArrayList<PImage>();
+    moveFrames.add(g1);
+    moveFrames.add(g2);
+    moveFrames.add(g3);
+    moveFrames.add(g4);
+    
+    walk = new Animation(moveFrames, "run", 100, true);
+    
+    anim = new Animator();
+    anim.AddAnimation(idle);
   }
   
   
@@ -63,14 +87,36 @@ class Character{
     y+=yv;
   }
   
-  void show(){
+  
+  void RenderAnimation()
+  {
+    if(abs(xv) > 0.5 || abs(yv) > 0.5)
+    {
+      if(anim.current != walk)
+      {
+        anim.SetCurrent(walk);
+      }
+    }
+    else if(abs(xv) <= 0.4 || abs(yv) <= 0.4)
+    {
+      if(anim.current != idle)
+      {
+        anim.SetCurrent(idle);
+      }
+    }
+    
+    sprite = anim.AdvanceAnimation();
+    
     pushMatrix();
     translate(x,y);
-    if(!faceRight){
-      scale(-1,1);
-    }
-    fill(255);
-    image(sprite,0,0);
+    if(!faceRight)scale(-1,1);
+    image(sprite, 0,0);
+    popMatrix();
+  }
+  
+  void show(){
+    pushMatrix();
+    RenderAnimation();
     popMatrix();
   }
 }

@@ -1,8 +1,12 @@
 Character player;
-PImage ghostSprite;
 Boolean moveUP = false,moveDOWN = false,moveRIGHT = false,moveLEFT = false;
 int mapSize = 5;
 Room[][] map = new Room[mapSize][mapSize];
+
+ArrayList<Animation> BoxAnim;
+ArrayList<Animation> GunAnim;
+
+ArrayList<PImage> GunSprites;
 
 void setup(){
   size(800,800);
@@ -15,8 +19,10 @@ void setup(){
     }
   }
   
-  ghostSprite = loadImage("/sprites/Ghost.png");
-  player = new Character(width/2,height/2,ghostSprite,0);
+  player = new Character(width/2,height/2);
+  
+  SetBoxAnim();
+  SetGunAnim();
 }
 
 void draw(){
@@ -27,6 +33,24 @@ void draw(){
   player.show();
   //--------- other stuff
   text(player.roomIndex,width-10,height-5);
+}
+
+void SetBoxAnim()
+{
+  
+}
+
+void SetGunAnim(){
+  for(int i=0;i<11;i++){
+    if(i<10){
+      PImage image = loadImage("/sprites/Gun/GUN_0"+i);
+      GunSprites.add(image);
+    }else{
+      PImage image = loadImage("/sprites/Gun/GUN_"+i);
+      GunSprites.add(image);
+    }
+  }
+  GunAmin = new Animation(
 }
 
 

@@ -3,10 +3,12 @@ Boolean moveUP = false,moveDOWN = false,moveRIGHT = false,moveLEFT = false;
 int mapSize = 5;
 Room[][] map = new Room[mapSize][mapSize];
 
-ArrayList<Animation> BoxAnim;
-ArrayList<Animation> GunAnim;
+ArrayList<Animation> BoxAnim = new ArrayList();
+ArrayList<Animation> GunAnim = new ArrayList();
 
-ArrayList<PImage> GunSprites;
+Animation GunAnimation;
+
+ArrayList<PImage> GunSprites = new ArrayList();
 
 void setup(){
   size(800,800);
@@ -43,14 +45,14 @@ void SetBoxAnim()
 void SetGunAnim(){
   for(int i=0;i<11;i++){
     if(i<10){
-      PImage image = loadImage("/sprites/Gun/GUN_0"+i);
+      PImage image = loadImage("/sprites/gun/GUN_0"+i+".png");
       GunSprites.add(image);
     }else{
-      PImage image = loadImage("/sprites/Gun/GUN_"+i);
+      PImage image = loadImage("/sprites/gun/GUN_"+i+".png");
       GunSprites.add(image);
     }
   }
-  GunAmin = new Animation(
+  GunAnimation = new Animation(GunSprites, "GunAnimation", 45, true);
 }
 
 

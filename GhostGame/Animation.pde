@@ -38,7 +38,7 @@ public class Animator{
     timer = 0;
     frame = 0;
     current = anim;
-    println("set to " + anim.name);
+    //println("set to " + anim.name);
   }
   
   public PImage AdvanceAnimation()
@@ -58,7 +58,7 @@ public class Animator{
     if(frame > current.frames.size() - 1 && current.loop)
     {
       frame = 0;
-      println("reset to zero");
+      //println("reset to zero");
     }
     else if(frame >= current.frames.size() - 1 && !current.loop)
     {
@@ -78,6 +78,8 @@ public class Animator{
     return AdvanceAnimation();
   }
 }
+
+
 
 public class Animation{
    ArrayList<PImage> frames;

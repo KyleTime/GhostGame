@@ -10,10 +10,13 @@ Animation GunAnimation;
 
 ArrayList<PImage> GunSprites = new ArrayList();
 
+Weapon gun;
+
 void setup(){
   size(800,800);
   imageMode(CENTER);
   textAlign(CENTER);
+  frameRate(120);
   
   for(int i=0;i<mapSize;i++){
     for(int j=0;j<mapSize;j++){
@@ -25,6 +28,9 @@ void setup(){
   
   SetBoxAnim();
   SetGunAnim();
+  
+  gun = new Weapon(player,GunAnimation);
+  player.gun = gun;
 }
 
 void draw(){
@@ -33,6 +39,9 @@ void draw(){
   //--------- player update
   player.update();
   player.show();
+  //--------- weapon update
+  player.gun.radian=atan2(mouseY-player.y,mouseX-player.x);
+  player.gun.render();
   //--------- other stuff
   text(player.roomIndex,width-10,height-5);
 }
@@ -52,7 +61,7 @@ void SetGunAnim(){
       GunSprites.add(image);
     }
   }
-  GunAnimation = new Animation(GunSprites, "GunAnimation", 45, true);
+  GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
 }
 
 

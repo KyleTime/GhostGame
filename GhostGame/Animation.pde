@@ -52,7 +52,7 @@ public class Animator{
     }
     else
     {
-      timer += second();
+      timer++;
     }
     
     if(frame > current.frames.size() - 1 && current.loop)

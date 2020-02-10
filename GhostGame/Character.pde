@@ -6,13 +6,14 @@ class Character{
   Animation idle;
   Animation walk;
   Animator anim;
+  Weapon gun;
   
   public Character(float x, float y){
     this.x = x;
     this.y = y;
     
     faceRight=true;
-    moveSpeed = 0.3;
+    moveSpeed = 0.2;
     roomIndex = 0;
     
     PImage g1 = loadImage("/sprites/Ghost/ghost_0.png");
@@ -24,7 +25,7 @@ class Character{
     idleFrames.add(g1);
     idleFrames.add(g2);
     
-    idle = new Animation(idleFrames, "idle", 1000, true);
+    idle = new Animation(idleFrames, "idle", 10, true);
     
     ArrayList<PImage> moveFrames = new ArrayList<PImage>();
     moveFrames.add(g1);
@@ -32,7 +33,7 @@ class Character{
     moveFrames.add(g3);
     moveFrames.add(g4);
     
-    walk = new Animation(moveFrames, "run", 100, true);
+    walk = new Animation(moveFrames, "run", 5, true);
     
     anim = new Animator();
     anim.AddAnimation(idle);

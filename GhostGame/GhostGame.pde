@@ -12,6 +12,8 @@ ArrayList<PImage> GunSprites = new ArrayList();
 
 Weapon gun;
 
+BoxEnt box;
+
 void setup(){
   size(800,800);
   imageMode(CENTER);
@@ -31,6 +33,8 @@ void setup(){
   
   gun = new Weapon(player,GunAnimation);
   player.gun = gun;
+  
+  box = new BoxEnt(width/2 + 60, height/2, false);
 }
 
 void draw(){
@@ -44,6 +48,8 @@ void draw(){
   player.gun.render();
   //--------- other stuff
   text(player.roomIndex,width-10,height-5);
+  
+  box.Update();
 }
 
 void SetBoxAnim()

@@ -62,7 +62,7 @@ public class Animator{
     }
     else if(frame >= current.frames.size() - 1 && !current.loop)
     {
-      frame = current.frames.size();
+      frame = current.frames.size() - 1;
     }
     
     return current.frames.get(frame);

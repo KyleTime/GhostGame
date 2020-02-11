@@ -1,33 +1,41 @@
 class Weapon{
   Character owner;
-  float x,y,xy,xv, radian;
+  float radian, cool;
   Animator anim;
   Animation frames;
   Boolean using;
+  ArrayList<Bullet> bList = new ArrayList();
   
   public Weapon(Character c, Animation a){
     owner = c;
-    x=c.x;
-    y=c.y;
     anim = new Animator();
     frames = a;
     using = false;
     anim.SetCurrent(frames);
     radian=0;
+    cool=0;
   }
   
   void render(){
+    if(cool>0){
+      cool-=0.008;
+    }
     pushMatrix();
-    if(mouseX-x>=0)
+    if(mouseX-owner.x>=0){
       translate(owner.x+3,owner.y+5);
+      rotate(radian);
+    }
     else{
       translate(owner.x-5,owner.y+5);
       scale(-1,1);
-      radian = PI-radian;
+      rotate(PI-radian);
     }
-    rotate(radian);
     if(using){
       image(anim.AdvanceAnimation(),0,0);
+      if(cool<=0){
+        bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian));
+        cool=0.1;
+      }
     }
     else{
       anim.frame=0;
@@ -35,5 +43,9 @@ class Weapon{
       image(anim.AdvanceAnimation(),0,0);
     }
     popMatrix();
+    for(Bullet b:bList){
+      b.update();
+      b.show();
+    }
   }
 }

@@ -43,8 +43,12 @@ class Weapon{
       image(anim.AdvanceAnimation(),0,0);
     }
     popMatrix();
-    for(Bullet b:bList){
+    for(int i=0;i<bList.size();i++){
+      Bullet b = bList.get(i);
       b.update();
+      if(b.x>width||b.x<0||b.y>height||b.y<0){
+        bList.remove(b);
+      }
       b.show();
     }
   }

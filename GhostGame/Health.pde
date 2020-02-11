@@ -12,6 +12,9 @@ public class Health{
   
   float size;
   
+  float timer;
+  float InvulnTimer = 120;
+  
   public Health(float x,float y, float max, float size)
   {
     this.x = x;
@@ -22,6 +25,12 @@ public class Health{
     hp = max;
     
     this.size = size;
+  }
+  
+  void Update()
+  {
+    handleInvuln();
+    render();
   }
   
   void render()
@@ -39,6 +48,23 @@ public class Health{
     
     if(hp > 1)
       rect(x+small,y+small, xSize*(hp/max) - small*2,ySize - small*2);
+  }
+  
+  void subHP(float hp)
+  {
+    if(timer >= InvulnTimer)
+    {
+      this.hp -= hp;
+      timer = 0;
+    }
+  }
+  
+  void handleInvuln()
+  {
+    if(timer < InvulnTimer)
+    {
+      timer++;
+    }
   }
   
 }

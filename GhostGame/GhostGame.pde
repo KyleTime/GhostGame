@@ -3,11 +3,15 @@ Boolean moveUP = false,moveDOWN = false,moveRIGHT = false,moveLEFT = false;
 
 public ArrayList<Animation> BoxAnim;
 
+BoxEnt box;
+
 void setup(){
   size(800,800);
   player = new Character(width/2,height/2);
   
   SetBoxAnim();
+  
+  box = new BoxEnt(width/2 + 60, height/2, false);
 }
 
 void draw(){
@@ -16,6 +20,8 @@ void draw(){
   //--------- player update
   player.update();
   player.show();
+  
+  box.Update();
 }
 
 void SetBoxAnim()

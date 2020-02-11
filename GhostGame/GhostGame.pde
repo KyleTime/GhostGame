@@ -14,6 +14,8 @@ Weapon gun;
 
 BoxEnt box;
 
+Health bar;
+
 void setup(){
   size(800,800);
   imageMode(CENTER);
@@ -35,9 +37,11 @@ void setup(){
   player.gun = gun;
   
   box = new BoxEnt(width/2 + 60, height/2, false);
+  bar = new Health(10,10, 20, 5);
 }
 
 void draw(){
+  
   background(0);
   
   //--------- player update
@@ -50,6 +54,7 @@ void draw(){
   text(player.roomIndex,width-10,height-5);
   
   box.Update();
+  bar.render();
 }
 
 void SetBoxAnim()

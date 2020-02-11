@@ -78,3 +78,9 @@ void keyReleased(){
   if(key=='a')moveLEFT=false;
   if(key=='d')moveRIGHT=false;
 }
+void mousePressed(){
+  if(mouseButton==LEFT)player.gun.using = true;
+}
+void mouseReleased(){
+  if(mouseButton==LEFT)player.gun.using = false;
+}

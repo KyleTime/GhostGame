@@ -116,8 +116,6 @@ class Character{
   }
   
   void show(){
-    pushMatrix();
     RenderAnimation();
-    popMatrix();
   }
 }

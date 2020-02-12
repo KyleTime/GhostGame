@@ -33,7 +33,7 @@ class Weapon{
     if(using){
       image(anim.AdvanceAnimation(),0,0);
       if(cool<=0){
-        bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian));
+        bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian+randomGaussian()*PI/30));
         cool=0.1;
       }
     }

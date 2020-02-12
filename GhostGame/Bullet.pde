@@ -4,7 +4,7 @@ class Bullet{
     this.x=x;
     this.y=y;
     this.dir=dir;
-    bSpeed=3;
+    bSpeed=10;
   }
   
   void update(){

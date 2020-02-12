@@ -18,9 +18,6 @@ class Weapon{
   }
   
   void render(){
-    if(cool>0){
-      cool-=0.008;
-    }
     pushMatrix();
     if(mouseX-owner.x>=0){
       translate(owner.x+3,owner.y+5);
@@ -37,20 +34,9 @@ class Weapon{
         bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian+randomGaussian()*PI/30));
         cool=0.1;
       }
-  }
-  
-  void render(){
-    pushMatrix();
-    if(mouseX-x>=0)
-      translate(owner.x+3,owner.y+5);
-    else{
-      translate(owner.x-5,owner.y+5);
-      scale(-1,1);
-      radian = PI-radian;
-    }
-    rotate(radian);
-    if(using){
-      image(anim.AdvanceAnimation(),0,0);
+      else{
+        cool-=0.008;
+      }
     }
     else{
       anim.frame=0;

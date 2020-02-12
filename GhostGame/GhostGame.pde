@@ -73,20 +73,6 @@ void SetGunAnim(){
   GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
 }
 
-void SetGunAnim(){
-  for(int i=0;i<11;i++){
-    if(i<10){
-      PImage image = loadImage("/sprites/gun/GUN_0"+i+".png");
-      GunSprites.add(image);
-    }else{
-      PImage image = loadImage("/sprites/gun/GUN_"+i+".png");
-      GunSprites.add(image);
-    }
-  }
-  GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
-}
-
-
 //------------- PLAYER MOVEMENT
 void keyPressed(){
   if(key=='w')moveUP=true;

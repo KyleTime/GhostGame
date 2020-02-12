@@ -1,6 +1,11 @@
 class Room{
   int index;
-  ArrayList<Character> charList = new ArrayList();
+  
+  boo
+
+  ArrayList<BoxEnt> boxes;
+  ArrayList<Bootman> boots;
+  
   public Room(int i){
     index = i;
   }

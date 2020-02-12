@@ -88,6 +88,10 @@ class Character{
     y+=yv;
   }
   
+  void CheckRoomChange()
+  {
+    
+  }
   
   void RenderAnimation()
   {
@@ -116,8 +120,6 @@ class Character{
   }
   
   void show(){
-    pushMatrix();
     RenderAnimation();
-    popMatrix();
   }
 }

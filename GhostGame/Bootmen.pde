@@ -1,4 +1,4 @@
-public class BootMan{
+public class Bootman{
   
   float x,y,sizeB;
   
@@ -6,7 +6,7 @@ public class BootMan{
   
   float offsetX = 1, offsetY = 1;
   
-  public BootMan(float x, float y, float sizeB)
+  public Bootman(float x, float y, float sizeB)
   {
     this.x = x;
     this.y = y;

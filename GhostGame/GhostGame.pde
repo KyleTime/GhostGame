@@ -16,7 +16,7 @@ BoxEnt box;
 
 Health bar;
 
-BootMan bootmen;
+Bootman bootmen;
 
 void setup(){
   size(800,800);
@@ -32,14 +32,14 @@ void setup(){
   
   player = new Character(width/2,height/2);
   SetGunAnim();
-  
+
   gun = new Weapon(player,GunAnimation);
   player.gun = gun;
   
   box = new BoxEnt(width/2 + 60, height/2, false);
   bar = new Health(10,10, 20, 5);
   
-  bootmen = new BootMan(width/2,50,2);
+  bootmen = new Bootman(width/2,50,2);
 }
 
 void draw(){
@@ -72,7 +72,6 @@ void SetGunAnim(){
   }
   GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
 }
-
 
 //------------- PLAYER MOVEMENT
 void keyPressed(){

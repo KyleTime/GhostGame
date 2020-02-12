@@ -5,20 +5,19 @@ public class BoxEnt{
   float x;
   float y;
   
-  float speed = 4;
+  float speed = 1;
   
   Animator anim;
   float awakeTime = 10;
   float sleepTime = 60;
   float walkTime = 10;
   
-  //states include: chasing, wandering, sleep
-  String state;
-  
   boolean awaken;
   boolean movin;
   
   float detection = 100;
+  
+  Hurt hurt;
   
   public BoxEnt(float x, float y, boolean awake)
   {
@@ -28,6 +27,8 @@ public class BoxEnt{
     SetUpAnim();
     
     awaken = awake;
+    
+    hurt = new Hurt(5,40);
   }
   
   void Update()
@@ -46,6 +47,8 @@ public class BoxEnt{
       ChasePlayer();
       PlayWalk();
     }
+    
+    hurt.Update(x,y);
   }
     
   //ACTIONS
@@ -71,7 +74,7 @@ public class BoxEnt{
   
   void ChasePlayer()
   {
-    float theta = atan2(y-player.y+10,x-player.x+10);
+    float theta = atan2(y-player.y,x-player.x);
     
     float addX = -cos(theta)*speed;
     float addY = -sin(theta)*speed;

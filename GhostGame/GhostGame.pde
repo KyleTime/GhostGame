@@ -16,6 +16,8 @@ BoxEnt box;
 
 Health bar;
 
+BootMan bootmen;
+
 void setup(){
   size(800,800);
   imageMode(CENTER);
@@ -29,15 +31,15 @@ void setup(){
   }
   
   player = new Character(width/2,height/2);
-  
-  SetBoxAnim();
   SetGunAnim();
-  
+
   gun = new Weapon(player,GunAnimation);
   player.gun = gun;
   
   box = new BoxEnt(width/2 + 60, height/2, false);
   bar = new Health(10,10, 20, 5);
+  
+  bootmen = new BootMan(width/2,50,2);
 }
 
 void draw(){
@@ -54,12 +56,21 @@ void draw(){
   text(player.roomIndex,width-10,height-5);
   
   box.Update();
-  bar.render();
+  bar.Update();
+  bootmen.Update();
 }
 
-void SetBoxAnim()
-{
-  
+void SetGunAnim(){
+  for(int i=0;i<11;i++){
+    if(i<10){
+      PImage image = loadImage("/sprites/gun/GUN_0"+i+".png");
+      GunSprites.add(image);
+    }else{
+      PImage image = loadImage("/sprites/gun/GUN_"+i+".png");
+      GunSprites.add(image);
+    }
+  }
+  GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
 }
 
 void SetGunAnim(){

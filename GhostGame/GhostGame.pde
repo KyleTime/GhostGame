@@ -32,7 +32,7 @@ void setup(){
   
   player = new Character(width/2,height/2);
   SetGunAnim();
-  
+
   gun = new Weapon(player,GunAnimation);
   player.gun = gun;
   
@@ -58,6 +58,19 @@ void draw(){
   box.Update();
   bar.Update();
   bootmen.Update();
+}
+
+void SetGunAnim(){
+  for(int i=0;i<11;i++){
+    if(i<10){
+      PImage image = loadImage("/sprites/gun/GUN_0"+i+".png");
+      GunSprites.add(image);
+    }else{
+      PImage image = loadImage("/sprites/gun/GUN_"+i+".png");
+      GunSprites.add(image);
+    }
+  }
+  GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
 }
 
 void SetGunAnim(){

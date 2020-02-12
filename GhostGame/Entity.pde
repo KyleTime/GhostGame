@@ -82,7 +82,7 @@ public class BoxEnt{
     x += addX;
     y += addY;
     
-    println(addX +" " + addY);
+    //println(addX +" " + addY);
   }
   
 

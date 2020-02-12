@@ -1,5 +1,6 @@
 class Weapon{
   Character owner;
+  
   float radian, cool;
   Animator anim;
   Animation frames;
@@ -36,6 +37,20 @@ class Weapon{
         bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian+randomGaussian()*PI/30));
         cool=0.1;
       }
+  }
+  
+  void render(){
+    pushMatrix();
+    if(mouseX-x>=0)
+      translate(owner.x+3,owner.y+5);
+    else{
+      translate(owner.x-5,owner.y+5);
+      scale(-1,1);
+      radian = PI-radian;
+    }
+    rotate(radian);
+    if(using){
+      image(anim.AdvanceAnimation(),0,0);
     }
     else{
       anim.frame=0;

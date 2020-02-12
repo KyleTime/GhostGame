@@ -79,6 +79,8 @@ public class Animator{
   }
 }
 
+
+
 public class Animation{
    ArrayList<PImage> frames;
    String name;

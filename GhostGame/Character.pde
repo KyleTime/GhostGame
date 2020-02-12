@@ -1,18 +1,20 @@
 class Character{
   float x, y, xv, yv, moveSpeed;
   PImage sprite;
-  
-  //Kyle Animation Code
+  int roomIndex;
+  Boolean faceRight;
   Animation idle;
   Animation walk;
   Animator anim;
-  //End of Kyle Animation Code
+  Weapon gun;
   
   public Character(float x, float y){
     this.x = x;
     this.y = y;
     
-    moveSpeed = 0.3;
+    faceRight=true;
+    moveSpeed = 0.2;
+    roomIndex = 0;
     
     PImage g1 = loadImage("/sprites/Ghost/ghost_0.png");
     PImage g2 = loadImage("/sprites/Ghost/ghost_1.png");
@@ -39,34 +41,51 @@ class Character{
   
   
   void update(){
-    
-    
-    
-    
     //---------------passive slowdown
     xv*=0.95;
     yv*=0.95;
     //--------------- movement update
     if(moveUP&&yv<5)yv-=moveSpeed;
     if(moveDOWN&&yv>-5)yv+=moveSpeed;
-    if(moveLEFT)xv-=moveSpeed;
-    if(moveRIGHT)xv+=moveSpeed;
-    //--------------- wall bounds
+    if(moveLEFT){xv-=moveSpeed;faceRight=false;}
+    if(moveRIGHT){xv+=moveSpeed;faceRight=true;}
+    //--------------- room bounds
     if(x+xv>width){
-      xv=width-x;
+      if(roomIndex%mapSize<mapSize-1&&roomIndex%mapSize>=0){
+        roomIndex+=1;
+        x=0-xv;
+      }else{
+        xv=x-width;
+      }
     }else if(x+xv<0){
-      xv=x;
+      if(roomIndex%mapSize>0){
+        roomIndex-=1;
+        x=width-xv;
+      }
+      else{
+        xv=x;
+      }
     }
     if(y+yv>height){
-      yv=height-y;
+      if(roomIndex<mapSize*mapSize-mapSize&&roomIndex%mapSize>=0){
+        roomIndex+=mapSize;
+        y=0-yv;
+      }
+      else{
+        yv=y-height;
+      }
     }else if(y+yv<0){
-      yv=y;
+      if(roomIndex>=mapSize){
+        roomIndex-=mapSize;
+        y=height-yv;
+      }
+      else{
+        yv=y;
+      }
     }
     //-------------- position update
     x+=xv;
     y+=yv;
-    
-    RenderAnimation();
   }
   
   
@@ -88,14 +107,17 @@ class Character{
     }
     
     sprite = anim.AdvanceAnimation();
-
-    image(sprite, x,y);
+    
+    pushMatrix();
+    translate(x,y);
+    if(!faceRight)scale(-1,1);
+    image(sprite, 0,0);
+    popMatrix();
   }
   
   void show(){
     pushMatrix();
-    fill(255);
-    square(x,y,10);
+    RenderAnimation();
     popMatrix();
   }
 }

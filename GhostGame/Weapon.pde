@@ -5,7 +5,6 @@ class Weapon{
   Animator anim;
   Animation frames;
   Boolean using;
-  ArrayList<Bullet> bList = new ArrayList();
   
   public Weapon(Character c, Animation a){
     owner = c;
@@ -31,7 +30,7 @@ class Weapon{
     if(using){
       image(anim.AdvanceAnimation(),0,0);
       if(cool<=0){
-        bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian+randomGaussian()*PI/30));
+        player.getRoom().bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian+randomGaussian()*PI/40));
         cool=0.1;
       }
       else{
@@ -44,13 +43,5 @@ class Weapon{
       image(anim.AdvanceAnimation(),0,0);
     }
     popMatrix();
-    for(int i=0;i<bList.size();i++){
-      Bullet b = bList.get(i);
-      b.update();
-      if(b.x>width||b.x<0||b.y>height||b.y<0){
-        bList.remove(b);
-      }
-      b.show();
-    }
   }
 }

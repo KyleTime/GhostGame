@@ -12,11 +12,8 @@ ArrayList<PImage> GunSprites = new ArrayList();
 
 Weapon gun;
 
-BoxEnt box;
-
 Health bar;
 
-BootMan bootmen;
 
 void setup(){
   size(800,800);
@@ -36,14 +33,19 @@ void setup(){
   gun = new Weapon(player,GunAnimation);
   player.gun = gun;
   
-  box = new BoxEnt(width/2 + 60, height/2, false);
-  bar = new Health(10,10, 20, 5);
+  for(int i=0;i<mapSize;i++){
+    for(int j=0;j<mapSize;j++){
+      for(int a=0;a<3;a++){
+        if(i!=0||j!=0)
+          map[i][j].boxList.add(new BoxEnt(random(width/4,width/4*3) + 60, random(height/4,height/4*3), false));
+      }
+    }
+  }
   
-  bootmen = new BootMan(width/2,50,2);
+  bar = new Health(10,10, 20, 5);
 }
 
 void draw(){
-  
   background(0);
   
   //--------- player update
@@ -54,10 +56,22 @@ void draw(){
   player.gun.render();
   //--------- other stuff
   text(player.roomIndex,width-10,height-5);
+  //--------- bullet update
+  for(int i=0;i<player.getRoom().bList.size();i++){
+    Bullet b = player.getRoom().bList.get(i);
+    b.update();
+    if(b.x>width||b.x<0||b.y>height||b.y<0){
+      player.getRoom().bList.remove(b);
+    }
+    b.show();
+  }
+  //-------- Box update
+  for(int i=0;i<player.getRoom().boxList.size();i++){
+    BoxEnt box = player.getRoom().boxList.get(i);
+    box.Update();
+  }
   
-  box.Update();
   bar.Update();
-  bootmen.Update();
 }
 
 void SetGunAnim(){

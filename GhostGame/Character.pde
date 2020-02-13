@@ -118,4 +118,8 @@ class Character{
   void show(){
     RenderAnimation();
   }
+  
+  Room getRoom(){
+    return map[(roomIndex-(roomIndex%mapSize))/mapSize][roomIndex%mapSize];
+  }
 }

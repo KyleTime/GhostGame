@@ -10,6 +10,7 @@ class Bullet{
   void update(){
     x+=cos(dir)*bSpeed;
     y+=sin(dir)*bSpeed;
+    
   }
   
   void show(){

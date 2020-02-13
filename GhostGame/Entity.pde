@@ -4,6 +4,7 @@ public class BoxEnt{
   
   float x;
   float y;
+  float health;
   
   float speed = 1;
   
@@ -15,7 +16,7 @@ public class BoxEnt{
   boolean awaken;
   boolean movin;
   
-  float detection = 100;
+  float detection = 300;
   
   Hurt hurt;
   
@@ -23,6 +24,7 @@ public class BoxEnt{
   {
     this.x = x;
     this.y = y;
+    health = 100;
     
     SetUpAnim();
     

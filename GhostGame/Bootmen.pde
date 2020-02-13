@@ -1,5 +1,7 @@
 public class Bootman{
   
+  boolean enabled;
+  
   float x,y,sizeB;
   
   PImage man, boot;

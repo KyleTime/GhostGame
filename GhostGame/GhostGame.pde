@@ -12,11 +12,11 @@ ArrayList<PImage> GunSprites = new ArrayList();
 
 Weapon gun;
 
-BoxEnt box;
-
 Health bar;
 
-Bootman bootmen;
+PImage vertTile;
+PImage sideTile;
+PImage groundTile;
 
 void setup(){
   size(800,800);
@@ -24,9 +24,13 @@ void setup(){
   textAlign(CENTER);
   frameRate(120);
   
+  LoadTileImages();
+  
   for(int i=0;i<mapSize;i++){
     for(int j=0;j<mapSize;j++){
-      map[i][j] = new Room(i+j);
+      map[i][j] = new Room();
+      
+      map[i][j].Generate();
     }
   }
   
@@ -36,10 +40,7 @@ void setup(){
   gun = new Weapon(player,GunAnimation);
   player.gun = gun;
   
-  box = new BoxEnt(width/2 + 60, height/2, false);
   bar = new Health(10,10, 20, 5);
-  
-  bootmen = new Bootman(width/2,50,2);
 }
 
 void draw(){
@@ -55,9 +56,7 @@ void draw(){
   //--------- other stuff
   text(player.roomIndex,width-10,height-5);
   
-  box.Update();
   bar.Update();
-  bootmen.Update();
 }
 
 void SetGunAnim(){
@@ -71,6 +70,13 @@ void SetGunAnim(){
     }
   }
   GunAnimation = new Animation(GunSprites, "GunAnimation", 1, true);
+}
+
+void LoadTileImages()
+{
+  vertTile = loadImage("/sprites/WallTile.png");
+  sideTile = loadImage("/sprites/WallTileSide.png");
+  groundTile = loadImage("/sprites/Ground Tile.png");
 }
 
 //------------- PLAYER MOVEMENT

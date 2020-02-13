@@ -2,6 +2,8 @@ public class BoxEnt{
 
   PImage Sprite;
   
+  boolean enabled;
+  
   float x;
   float y;
   
@@ -33,22 +35,22 @@ public class BoxEnt{
   
   void Update()
   {
-    if(!awaken)
-    {
-      CheckPlayer(detection);
-      PlaySleep();
-    }
-    else if(!movin)
-    {
-      AwakenMyMasters();
-    }
-    else  
-    {
-      ChasePlayer();
-      PlayWalk();
-    }
-    
-    hurt.Update(x,y);
+      if(!awaken)
+      {
+        CheckPlayer(detection);
+        PlaySleep();
+      }
+      else if(!movin)
+      {
+        AwakenMyMasters();
+      }
+      else  
+      {
+        ChasePlayer();
+        PlayWalk();
+      }
+      
+      hurt.Update(x,y);
   }
     
   //ACTIONS

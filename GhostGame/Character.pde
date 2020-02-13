@@ -86,11 +86,15 @@ class Character{
     //-------------- position update
     x+=xv;
     y+=yv;
+    
+    //CheckRoomChange();
+    UpdateRoom();
   }
   
-  void CheckRoomChange()
+  void UpdateRoom()
   {
-    
+    map[roomIndex%mapSize][(roomIndex - (roomIndex&mapSize))/mapSize].UpdateObjs();
+    println("updated: " + map[roomIndex%mapSize][(roomIndex - (roomIndex&mapSize))/mapSize].boots.size());
   }
   
   void RenderAnimation()

@@ -28,6 +28,7 @@ class Weapon{
       rotate(PI-radian);
     }
     if(using){
+      translate(random(-2,2),random(-2,2));
       image(anim.AdvanceAnimation(),0,0);
       if(cool<=0){
         player.getRoom().bList.add(new Bullet(owner.x+cos(radian),owner.y+sin(radian),radian+randomGaussian()*PI/40));

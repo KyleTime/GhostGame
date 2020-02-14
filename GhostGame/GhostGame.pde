@@ -55,7 +55,14 @@ void draw(){
   player.gun.radian=atan2(mouseY-player.y,mouseX-player.x);
   player.gun.render();
   //--------- other stuff
-  text(player.roomIndex,width-10,height-5);
+  int entCount=0;
+  for(Room[] rList:map){
+    for(Room r:rList){
+      entCount+=r.boxList.size();
+    }
+  }
+  fill(255);
+  text("Monsters Left: "+entCount,62,45);
   //--------- bullet update
   for(int i=0;i<player.getRoom().bList.size();i++){
     Bullet b = player.getRoom().bList.get(i);

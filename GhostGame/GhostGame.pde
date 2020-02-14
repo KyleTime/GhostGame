@@ -1,7 +1,7 @@
 Character player;
 Boolean moveUP = false,moveDOWN = false,moveRIGHT = false,moveLEFT = false;
 int mapSize = 5;
-Room[][] map = new Room[mapSize][mapSize];
+Room[][] map = new Room[mapSize + 1][mapSize + 1];
 
 ArrayList<Animation> BoxAnim = new ArrayList();
 ArrayList<Animation> GunAnim = new ArrayList();
@@ -18,6 +18,8 @@ PImage vertTile;
 PImage sideTile;
 PImage groundTile;
 
+int[] nextFocus;
+
 void setup(){
   size(800,800);
   imageMode(CENTER);
@@ -26,11 +28,12 @@ void setup(){
   
   LoadTileImages();
   
-  for(int i=0;i<mapSize;i++){
-    for(int j=0;j<mapSize;j++){
-      map[i][j] = new Room();
-      
-      map[i][j].Generate();
+  for(int y = 0; y <= mapSize; y++)
+  {
+    for(int x = 0; x <= mapSize; x++)
+    {
+      map[x][y] = new Room(x,y);
+      map[x][y].Generate();
     }
   }
   
@@ -48,7 +51,7 @@ void draw(){
   background(0);
   
   //--------- player update
-  player.update();
+  player.Update();
   player.show();
   //--------- weapon update
   player.gun.radian=atan2(mouseY-player.y,mouseX-player.x);
@@ -77,6 +80,16 @@ void LoadTileImages()
   vertTile = loadImage("/sprites/WallTile.png");
   sideTile = loadImage("/sprites/WallTileSide.png");
   groundTile = loadImage("/sprites/Ground Tile.png");
+}
+
+public int RoomX(int roomIndex)
+{
+  return roomIndex%mapSize;
+}
+
+public int RoomY(int roomIndex)
+{
+  return (roomIndex - (roomIndex%mapSize))/mapSize;
 }
 
 //------------- PLAYER MOVEMENT

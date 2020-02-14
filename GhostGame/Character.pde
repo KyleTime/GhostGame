@@ -40,7 +40,7 @@ class Character{
   }
   
   
-  void update(){
+  void Update(){
     //---------------passive slowdown
     xv*=0.95;
     yv*=0.95;
@@ -93,8 +93,7 @@ class Character{
   
   void UpdateRoom()
   {
-    map[roomIndex%mapSize][(roomIndex - (roomIndex&mapSize))/mapSize].UpdateObjs();
-    println("updated: " + map[roomIndex%mapSize][(roomIndex - (roomIndex&mapSize))/mapSize].boots.size());
+    map[RoomX(roomIndex)][RoomY(roomIndex)].UpdateObjs();
   }
   
   void RenderAnimation()

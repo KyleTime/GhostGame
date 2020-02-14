@@ -7,6 +7,10 @@ public class BoxEnt{
   float x;
   float y;
   
+  EnemyHP health;
+  float startHP = 10;
+  float rad = 20;
+  
   float speed = 1;
   
   Animator anim;
@@ -31,26 +35,35 @@ public class BoxEnt{
     awaken = awake;
     
     hurt = new Hurt(5,40);
+    
+    health = new EnemyHP(startHP, rad);
   }
   
   void Update()
   {
-      if(!awaken)
-      {
-        CheckPlayer(detection);
-        PlaySleep();
+      if(health.hp > 0)
+      { 
+        if(!awaken)
+        {
+          CheckPlayer(detection);
+          PlaySleep();
+        }
+        else if(!movin)
+        {
+          AwakenMyMasters();
+        }
+        else  
+        {
+          ChasePlayer();
+          PlayWalk();
+        }
+        
+        health.x = this.x;
+        health.y = this.y;
+        
+        hurt.Update(x,y);
+        health.Update();
       }
-      else if(!movin)
-      {
-        AwakenMyMasters();
-      }
-      else  
-      {
-        ChasePlayer();
-        PlayWalk();
-      }
-      
-      hurt.Update(x,y);
   }
     
   //ACTIONS

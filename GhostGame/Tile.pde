@@ -6,6 +6,8 @@ public class Tile{
   boolean flipX;
   boolean flipY;
   
+  float timer;
+  
   public Tile(float x, float y, int type, boolean flipX, boolean flipY)
   {
     this.x = x;

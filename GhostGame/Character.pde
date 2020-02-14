@@ -41,6 +41,9 @@ class Character{
   
   
   void Update(){
+    
+    if(bar.hp > 0)
+    {
     //---------------passive slowdown
     xv*=0.95;
     yv*=0.95;
@@ -86,6 +89,11 @@ class Character{
     //-------------- position update
     x+=xv;
     y+=yv;
+    }
+    else
+    {
+      setup();
+    }
     
     //CheckRoomChange();
     UpdateRoom();

@@ -8,6 +8,10 @@ public class Bootman{
   
   float offsetX = 1, offsetY = 1;
   
+  EnemyHP health;
+  float rad = 20;
+  float hp = 5;
+  
   public Bootman(float x, float y, float sizeB)
   {
     this.x = x;
@@ -16,11 +20,20 @@ public class Bootman{
     
     man = loadImage("sprites/Bootmen/man.png");
     boot = loadImage("sprites/Bootmen/Boot.png");
+    
+    health = new EnemyHP(hp,rad);
   }
   
   void Update()
   {
-    Render();
+    if(health.hp > 0)
+    {
+      Render();
+      
+      health.x = x;
+      health.y = y;
+      health.Update();
+    }
   }
   
   void Render()

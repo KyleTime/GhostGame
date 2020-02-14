@@ -20,7 +20,14 @@ PImage groundTile;
 
 int[] nextFocus;
 
+int numFloors = 0;
+
 void setup(){
+  map = new Room[mapSize][mapSize];
+  BoxAnim.clear();
+  GunAnim.clear();
+  GunSprites.clear();
+  
   size(800,800);
   imageMode(CENTER);
   textAlign(CENTER);
@@ -28,14 +35,29 @@ void setup(){
   
   LoadTileImages();
   
-  for(int y = 0; y <= mapSize; y++)
+  //GENERATE ROOMS
+  for(int y = 0; y < mapSize; y++)
   {
-    for(int x = 0; x <= mapSize; x++)
+    for(int x = 0; x < mapSize; x++)
     {
       map[x][y] = new Room(x,y);
-      map[x][y].Generate();
+      
+      println(x + " " + y);
+      
+      map[x][y].boxes.add(new BoxEnt(50,50,false));
+      
+      if(x == 4 && y == 4)
+      {
+        map[x][y].GenEnd();
+        println("generated end");
+      }
+      else
+      {
+        map[x][y].Generate();
+      }
     }
   }
+  //GENERATE ROOMS
   
   player = new Character(width/2,height/2);
   SetGunAnim();
@@ -60,6 +82,20 @@ void draw(){
   text(player.roomIndex,width-10,height-5);
   
   bar.Update();
+  
+  textUpdate();
+}
+
+void textUpdate()
+{
+  fill(255);
+  stroke(0);
+  rect(width - 170, height - 50, 150, 40);
+  
+  textSize(25);
+  fill(0);
+  stroke(0);
+  text("FLOORS: " + numFloors,width - 100, height - 20);
 }
 
 void SetGunAnim(){
@@ -90,6 +126,11 @@ public int RoomX(int roomIndex)
 public int RoomY(int roomIndex)
 {
   return (roomIndex - (roomIndex%mapSize))/mapSize;
+}
+
+public float Distance(float x1, float y1, float x2, float y2)
+{
+  return sqrt(pow(x1 - x2,2) + pow(y1 - y2,2));
 }
 
 //------------- PLAYER MOVEMENT

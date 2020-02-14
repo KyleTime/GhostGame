@@ -70,6 +70,8 @@ void draw(){
     BoxEnt box = player.getRoom().boxList.get(i);
     box.Update();
   }
+  //bullet damage
+  player.damageEnts();
   
   bar.Update();
 }

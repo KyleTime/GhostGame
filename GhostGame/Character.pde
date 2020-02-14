@@ -122,4 +122,22 @@ class Character{
   Room getRoom(){
     return map[(roomIndex-(roomIndex%mapSize))/mapSize][roomIndex%mapSize];
   }
+  
+  void damageEnts(){
+    for(int i=0;i<getRoom().bList.size();i++){
+      for(int j=0;j<getRoom().boxList.size();j++){
+        if(i<getRoom().bList.size()&&j<getRoom().boxList.size()){
+          Bullet bul = getRoom().bList.get(i);
+          BoxEnt box = getRoom().boxList.get(j);
+          float d = sqrt(pow(bul.x-box.x,2)+pow(bul.y-box.y,2));
+          if(d<=20){
+            getRoom().bList.remove(bul);
+            box.health-=5;
+            if(box.health<=0)
+              getRoom().boxList.remove(box);
+          }
+        }
+      }
+    }
+  }
 }

@@ -11,7 +11,7 @@ public class BoxEnt{
   float startHP = 10;
   float rad = 20;
   
-  float speed = 1;
+  float speed = 2;
   
   Animator anim;
   float awakeTime = 10;
@@ -21,7 +21,7 @@ public class BoxEnt{
   boolean awaken;
   boolean movin;
   
-  float detection = 100;
+  float detection = 150;
   
   Hurt hurt;
   
@@ -43,6 +43,11 @@ public class BoxEnt{
   {
       if(health.hp > 0)
       { 
+        if(health.hp < startHP)
+        {
+          awaken = true;
+        }
+        
         if(!awaken)
         {
           CheckPlayer(detection);
@@ -56,12 +61,12 @@ public class BoxEnt{
         {
           ChasePlayer();
           PlayWalk();
+          hurt.Update(x,y);
         }
         
         health.x = this.x;
         health.y = this.y;
-        
-        hurt.Update(x,y);
+      
         health.Update();
       }
   }

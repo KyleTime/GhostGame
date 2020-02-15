@@ -44,8 +44,6 @@ void setup(){
       
       println(x + " " + y);
       
-      map[x][y].boxes.add(new BoxEnt(50,50,false));
-      
       if(x == 4 && y == 4)
       {
         map[x][y].GenEnd();
@@ -79,7 +77,6 @@ void draw(){
   player.gun.radian=atan2(mouseY-player.y,mouseX-player.x);
   player.gun.render();
   //--------- other stuff
-  text(player.roomIndex,width-10,height-5);
   
   bar.Update();
   
@@ -88,12 +85,12 @@ void draw(){
 
 void textUpdate()
 {
-  fill(255);
+  fill(54,125,125);
   stroke(0);
   rect(width - 170, height - 50, 150, 40);
   
   textSize(25);
-  fill(0);
+  fill(3,50,0);
   stroke(0);
   text("FLOORS: " + numFloors,width - 100, height - 20);
 }

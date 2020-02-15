@@ -92,6 +92,7 @@ class Character{
     }
     else
     {
+      numFloors = 0;
       setup();
     }
     

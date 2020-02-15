@@ -13,6 +13,8 @@ class Room{
   
   float tileSize = 32;
   
+  float timer;
+  
   int xSize = (int)(width/tileSize);
   int ySize = (int)(height/tileSize);
   
@@ -44,6 +46,17 @@ class Room{
     {
       bm.Update();
     }
+    
+    if(xI == mapSize - 1 && yI == mapSize - 1)
+    {
+      timer++;
+      
+      if(timer > 120)
+      {
+        numFloors++;
+        setup();
+      }
+    }
   }
   
   void Generate()
@@ -52,10 +65,25 @@ class Room{
     {
       for(int y = 0; y < height/tileSize; y++)
       {
+        //FLOOR TILES
         if(y != 0 && y != height/tileSize - 1 && x != 0 && x != width/tileSize - 1)
         {
           tiles[x][y] = new Tile(x*tileSize + tileSize/2,y*tileSize + tileSize/2,2, false, false);
+          
+          if(xI != 0 || yI != 0)
+          {
+            if(x > 2 && y > 2 && x < width/tileSize - 2 && y < height/tileSize - 2)
+            {
+              float spawnChance = random(1);
+              
+              if(spawnChance < 0.05)
+              {
+                boxes.add(new BoxEnt(x*tileSize + tileSize/2,y*tileSize + tileSize/2, false));
+              }
+            }
+          }
         }
+        //WALL TILES
         else if(y != 0 && y != height/tileSize - 1)
         {
           if(x == 0)

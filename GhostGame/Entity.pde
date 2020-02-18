@@ -8,7 +8,7 @@ public class BoxEnt{
   float y;
   
   EnemyHP health;
-  float startHP = 10;
+  float startHP = 5;
   float rad = 20;
   
   float speed = 2;

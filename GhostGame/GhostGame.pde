@@ -22,39 +22,69 @@ int[] nextFocus;
 
 int numFloors = 0;
 
+int x, y;
+
 void setup(){
+  
+  size(800,800);
+  
+  background(100);
+  
+  imageMode(CENTER);
+  textAlign(CENTER);
+  
+  rectMode(CENTER);
+  stroke(230);
+  fill(150);
+  rect(width/2,height/2, 200, 50);
+  
+  for(Room[] r:map){
+    for(Room r1:r){
+      r1 = null;
+    }
+  }
+  
+
+  
   map = new Room[mapSize][mapSize];
   BoxAnim.clear();
   GunAnim.clear();
   GunSprites.clear();
-  
-  size(800,800);
-  imageMode(CENTER);
-  textAlign(CENTER);
-  frameRate(120);
+
+
   
   LoadTileImages();
   
-  //GENERATE ROOMS
-  for(int y = 0; y < mapSize; y++)
+  x = 0;
+  y = 0;
+
+    
+  if(y < mapSize && x < mapSize)
   {
-    for(int x = 0; x < mapSize; x++)
-    {
-      map[x][y] = new Room(x,y);
-      
-      println(x + " " + y);
-      
-      if(x == 4 && y == 4)
-      {
-        map[x][y].GenEnd();
-        println("generated end");
-      }
-      else
-      {
-        map[x][y].Generate();
-      }
-    }
+    Advance();
   }
+  
+  if(y < mapSize && x < mapSize)
+  {
+    Advance();
+  }
+  
+  if(y < mapSize && x < mapSize)
+  {
+    Advance();
+  }
+  
+  if(y < mapSize && x < mapSize)
+  {
+    Advance();
+  }
+  
+  if(y < mapSize && x < mapSize)
+  {
+    Advance();
+  }
+  
+  
   //GENERATE ROOMS
   
   player = new Character(width/2,height/2);
@@ -64,6 +94,45 @@ void setup(){
   player.gun = gun;
   
   bar = new Health(10,10, 20, 5);
+  
+  rectMode(CORNER);
+    frameRate(120);
+}
+
+void Advance()
+{
+  LoadRoom(x,y);
+  
+  x++;
+  LoadRoom(x,y);
+  
+  x++;
+  LoadRoom(x,y);
+  
+  x++;
+  LoadRoom(x,y);  
+  x++;
+  LoadRoom(x,y);
+  
+  x = 0;
+  y++;
+}
+
+
+void LoadRoom(int x, int y)
+{
+    map[x][y] = new Room(x,y);
+    
+    println(x + " " + y);
+    
+    if(x == 4 && y == 4)
+    {
+      map[x][y].GenEnd();
+    }
+    else
+    {
+      map[x][y].Generate();
+    }
 }
 
 void draw(){

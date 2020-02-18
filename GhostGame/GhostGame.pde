@@ -35,7 +35,7 @@ void setup(){
   
   for(int i=0;i<mapSize;i++){
     for(int j=0;j<mapSize;j++){
-      for(int a=0;a<3;a++){
+      for(int a=0;a<20;a++){
         if(i!=0||j!=0)
           map[i][j].boxList.add(new BoxEnt(random(width/4,width/4*3) + 60, random(height/4,height/4*3), false));
       }

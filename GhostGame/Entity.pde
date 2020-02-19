@@ -24,7 +24,7 @@ public class BoxEnt{
   {
     this.x = x;
     this.y = y;
-    health = 100;
+    health = 25;
     
     SetUpAnim();
     
@@ -39,6 +39,9 @@ public class BoxEnt{
     {
       CheckPlayer(detection);
       PlaySleep();
+      if(health<25){
+        awaken=true;
+      }
     }
     else if(!movin)
     {
